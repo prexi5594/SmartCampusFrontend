@@ -1,6 +1,6 @@
 import FacilityCard from "./FacilityCard";
 
-function FacilityGrid({ facilities }) {
+function FacilityGrid({ facilities, onViewLocation }) {
   if (!facilities.length) {
     return <p className="empty-message">No facilities found.</p>;
   }
@@ -8,7 +8,11 @@ function FacilityGrid({ facilities }) {
   return (
     <div className="facility-grid">
       {facilities.map((facility) => (
-        <FacilityCard key={facility.id} facility={facility} />
+        <FacilityCard
+          key={facility.id}
+          facility={facility}
+          onViewLocation={onViewLocation}
+        />
       ))}
     </div>
   );

@@ -13,6 +13,7 @@ import facilities from "./data/facilities";
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFacilityId, setSelectedFacilityId] = useState(null);
 
   function handleSearch(query) {
     setSearchQuery(query);
@@ -27,13 +28,31 @@ function App() {
 
   function navigateTo(page) {
     setSearchQuery("");
+    setSelectedFacilityId(null);
     setCurrentPage(page);
+    window.scrollTo(0, 0);
+  }
+
+  function handleViewLocation(facility) {
+    handlePlaceSelect(facility.routeId);
+  }
+
+  function handlePlaceSelect(placeId) {
+    setSearchQuery("");
+    setSelectedFacilityId(placeId);
+    setCurrentPage("explore");
   }
 
   function renderPage() {
     switch (currentPage) {
       case "explore":
-        return <ExploreCampusPage facilities={filteredFacilities} />;
+        return (
+          <ExploreCampusPage
+            facilities={filteredFacilities}
+            routeFacilities={facilities}
+            selectedFacilityId={selectedFacilityId}
+          />
+        );
 
       case "about":
         return <AboutPage />;
@@ -48,6 +67,8 @@ function App() {
             facilities={facilities}
             onSearch={handleSearch}
             onExplore={() => navigateTo("explore")}
+            onViewLocation={handleViewLocation}
+            onPlaceSelect={handlePlaceSelect}
           />
         );
     }

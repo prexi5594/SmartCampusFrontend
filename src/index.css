@@ -1,5 +1,10 @@
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --font-body: "Nunito", sans-serif;
+  --font-display: "Fredoka", "Nunito", sans-serif;
+}
 
 * {
   margin: 0;
@@ -12,7 +17,7 @@ html {
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-body);
   background: #f3edff;
   color: #29213d;
   min-width: 320px;

@@ -18,7 +18,7 @@ function HeroSection({ onSearch, onExplore }) {
         </h1>
 
         <p>
-          Explore your campus with ease. Find lecture halls, laboratories,
+          Explore your campus with ease. Find the Science Center, laboratories,
           libraries and other facilities in just a few clicks.
         </p>
 
@@ -27,7 +27,7 @@ function HeroSection({ onSearch, onExplore }) {
         <div className="popular-searches">
           <span>Popular:</span>
           <button onClick={() => onSearch("Library")}>Library</button>
-          <button onClick={() => onSearch("Lecture Halls")}>Lecture Halls</button>
+          <button onClick={() => onSearch("Science Center")}>Science Center</button>
         </div>
       </div>
 

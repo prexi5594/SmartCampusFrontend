@@ -2,7 +2,13 @@ import HeroSection from "../components/HeroSection";
 import CampusMap from "../components/CampusMap";
 import FacilityGrid from "../components/FacilityGrid";
 
-function HomePage({ facilities, onSearch, onExplore }) {
+function HomePage({
+  facilities,
+  onSearch,
+  onExplore,
+  onViewLocation,
+  onPlaceSelect,
+}) {
   return (
     <>
       <HeroSection onSearch={onSearch} onExplore={onExplore} />
@@ -14,7 +20,7 @@ function HomePage({ facilities, onSearch, onExplore }) {
           </div>
         </div>
 
-        <CampusMap />
+        <CampusMap onPlaceSelect={onPlaceSelect} />
       </section>
 
       <section className="section-container facilities-section">
@@ -26,7 +32,10 @@ function HomePage({ facilities, onSearch, onExplore }) {
           </div>
         </div>
 
-        <FacilityGrid facilities={facilities} />
+        <FacilityGrid
+          facilities={facilities}
+          onViewLocation={onViewLocation}
+        />
       </section>
 
       <section className="help-section">
@@ -36,7 +45,7 @@ function HomePage({ facilities, onSearch, onExplore }) {
         </div>
         <aside className="support-card">
           <strong>Need a hand finding your way?</strong>
-          <p>Visit the welcome desk at the Main Entrance for campus information and accessible route guidance.</p>
+          <p>Visit the welcome desk at USIU Gate A for campus information and accessible route guidance.</p>
           <a href="mailto:campus@example.edu">Contact campus support ↗</a>
         </aside>
       </section>

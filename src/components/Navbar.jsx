@@ -17,6 +17,7 @@ function Navbar({ currentPage, onNavigate }) {
             <img src="/campus-logo.svg" alt="" />
           </span>
           <span>
+            <strong>  USIU </strong>
             <strong>Smart Campus</strong>
             <small>NAVIGATOR</small>
           </span>
@@ -62,11 +63,18 @@ function Navbar({ currentPage, onNavigate }) {
           >
             Contact
           </button>
+
+          <button
+            className="nav-map-link"
+            onClick={() => navigate("explore")}
+          >
+            Open campus map <span aria-hidden="true">→</span>
+          </button>
         </div>
 
         <button
           className="nav-button"
-          onClick={() => onNavigate("explore")}
+          onClick={() => navigate("explore")}
         >
           Open campus map <span aria-hidden="true">→</span>
         </button>

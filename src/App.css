@@ -19,7 +19,7 @@ button {
 }
 
 h1, h2, h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-display);
 }
 
 /* NAVBAR */
@@ -69,6 +69,10 @@ h1, h2, h3 {
   gap: 28px;
 }
 
+.nav-map-link {
+  display: none;
+}
+
 .nav-link {
   background: transparent;
   color: #5e5968;
@@ -89,11 +93,14 @@ h1, h2, h3 {
   padding: 13px 21px;
   border-radius: 9px;
   font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .nav-button:hover,
 .primary-button:hover {
+  transform: translateY(-2px);
   background: var(--primary-dark);
+  box-shadow: 0 7px 16px #5633aa30;
 }
 
 .brand {
@@ -129,7 +136,7 @@ h1, h2, h3 {
   background: #2e213f;
   color: #fff;
   border: 0;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-display);
   font-size: 20px;
   box-shadow: 0 8px 18px rgba(87, 70, 216, 0.18);
 }
@@ -180,6 +187,26 @@ h1, h2, h3 {
   border: 0;
   border-radius: 0;
   padding: 56px 36px 64px;
+}
+
+.hero-eyebrow {
+  animation: rise-in 500ms ease-out both;
+}
+
+.hero h1 {
+  animation: rise-in 560ms 70ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-content > p {
+  animation: rise-in 560ms 130ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-content .search-bar {
+  animation: rise-in 560ms 190ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.popular-searches {
+  animation: rise-in 560ms 250ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hero-eyebrow {
@@ -533,6 +560,24 @@ h1, h2, h3 {
   box-shadow: 0 2px 0 #e1e2d6, 0 -2px 0 #e1e2d6;
 }
 
+.map-route {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.map-route polyline {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1.5 1;
+}
+
 .road-vertical {
   top: -2%;
   bottom: -2%;
@@ -573,6 +618,44 @@ h1, h2, h3 {
   align-items: center;
   gap: 5px;
   min-width: 22%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 160ms ease;
+  animation: marker-pop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.map-place:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.place-library,
+.place-labs {
+  animation-delay: 80ms;
+}
+
+.place-halls,
+.place-admin {
+  animation-delay: 140ms;
+}
+
+.place-centre,
+.place-cafe {
+  animation-delay: 200ms;
+}
+
+.place-parking,
+.place-sports {
+  animation-delay: 260ms;
+}
+
+.map-place:focus-visible,
+.main-entrance:focus-visible {
+  outline: 3px solid #2e213f;
+  outline-offset: 3px;
 }
 
 .map-building {
@@ -599,6 +682,27 @@ h1, h2, h3 {
   color: var(--dark);
   font-size: 13px;
   font-weight: 500;
+}
+
+.map-place.route-start .map-building,
+.map-place.route-destination .map-building {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px #e6f0ae, inset 0 0 0 8px #d9c7f1;
+}
+
+.map-place.location-selected .map-building {
+  border-color: var(--dark);
+  box-shadow: 0 0 0 4px #e6f0ae, 0 0 18px #6840c680, inset 0 0 0 8px #d9c7f1;
+}
+
+.map-place.route-destination .map-building {
+  background: var(--primary);
+}
+
+.main-entrance.route-start,
+.main-entrance.route-destination,
+.main-entrance.location-selected {
+  box-shadow: 0 0 0 4px #e6f0ae, 0 0 0 6px var(--primary);
 }
 
 .place-library {
@@ -663,6 +767,13 @@ h1, h2, h3 {
   background: #fff;
   color: var(--dark);
   font-size: 12px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  animation: fade-in 400ms 260ms ease both;
+}
+
+.main-entrance:hover {
+  transform: translateX(-50%) translateY(-3px) scale(1.03);
 }
 
 .map-search {
@@ -942,8 +1053,24 @@ h1, h2, h3 {
 
 /* EXPLORE PAGE */
 
+.explore-page-heading {
+  animation: rise-in 550ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.explore-facilities-panel {
+  animation: rise-in 550ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.explore-route-sidebar .route-planner {
+  animation: rise-in 550ms 150ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.campus-overview-panel {
+  animation: rise-in 600ms 120ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
 .page-heading {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .page-heading h1,
@@ -958,59 +1085,137 @@ h1, h2, h3 {
   line-height: 1.7;
 }
 
-.explore-layout {
+.explore-route-layout {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 30px;
-  margin-top: 50px;
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
 }
 
-.explore-sidebar {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px;
-  height: fit-content;
+.explore-route-sidebar {
+  display: grid;
+  gap: 18px;
 }
 
-.explore-sidebar h3 {
-  margin-bottom: 9px;
+.explore-facilities-panel,
+.campus-overview-panel {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid #e4d8f4;
+  border-radius: 20px;
+  background: #fff;
 }
 
-.explore-sidebar p {
+.explore-facilities-heading h2 {
+  color: var(--dark);
+  font-size: 20px;
+}
+
+.explore-facilities-heading p {
+  margin-top: 5px;
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.5;
 }
 
-.category-list {
+.explore-facility-list {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.explore-facility-button {
   display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin-top: 22px;
-}
-
-.category-button {
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--dark);
   text-align: left;
-  padding: 12px;
-  background: #f8f8fc;
-  color: #55596b;
-  border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  animation: rise-in 420ms ease-out both;
 }
 
-.category-button.selected {
-  background: var(--light-purple);
+.explore-facility-button:nth-child(even) {
+  animation-delay: 50ms;
+}
+
+.explore-facility-button:hover,
+.explore-facility-button.selected {
+  background: #eef3ff;
   color: var(--primary);
+}
+
+.explore-facility-button:hover {
+  transform: translateX(3px);
+}
+
+.explore-facility-button.selected {
   font-weight: 800;
 }
 
-.explore-results h2 {
-  margin-bottom: 20px;
-  font-size: 22px;
+.explore-facility-button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.explore-results .facility-grid {
-  grid-template-columns: repeat(2, 1fr);
+.facility-chevron {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 1;
+}
+
+.campus-overview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--dark);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.walking-route-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.walking-route-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.campus-overview-panel .campus-map {
+  margin-top: 0;
+}
+
+.campus-overview-panel .map-area {
+  height: clamp(460px, 48vw, 620px);
+  min-height: 460px;
+}
+
+.campus-overview-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 /* ROUTE PLANNER */
@@ -1023,8 +1228,17 @@ h1, h2, h3 {
   padding: 28px;
 }
 
+.explore-route-sidebar .route-planner {
+  max-width: none;
+  margin: 0;
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--light-purple);
+}
+
 .route-planner h3 {
-  font-size: 22px;
+  color: var(--dark);
+  font-size: 20px;
   margin-bottom: 9px;
 }
 
@@ -1059,6 +1273,12 @@ h1, h2, h3 {
   color: var(--dark);
 }
 
+.route-planner .primary-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+}
+
 .route-message {
   background: var(--light-purple);
   color: var(--primary-dark);
@@ -1067,6 +1287,83 @@ h1, h2, h3 {
   margin-top: 15px;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.route-result {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--light-purple);
+}
+
+.route-result h4 {
+  margin-bottom: 6px;
+  color: var(--dark);
+  font-size: 16px;
+}
+
+.route-summary {
+  color: var(--primary-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.route-steps {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+  padding-left: 22px;
+  color: var(--dark);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.route-disclaimer {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.start-directions-button {
+  margin-top: 12px;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marker-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ABOUT AND CONTACT */
@@ -1236,6 +1533,17 @@ h1, h2, h3 {
     display: flex;
   }
 
+  .nav-links.open .nav-map-link {
+    display: block;
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 9px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+  }
+
   .nav-link {
     width: 100%;
     padding: 14px;
@@ -1249,6 +1557,10 @@ h1, h2, h3 {
 }
 
 @media (max-width: 900px) {
+  .explore-route-layout {
+    grid-template-columns: 1fr;
+  }
+
   .hero {
     display: block;
     padding: 0;
@@ -1385,13 +1697,20 @@ h1, h2, h3 {
     font-size: 30px;
   }
 
-  .explore-layout {
-    grid-template-columns: 1fr;
+  .explore-facilities-panel,
+  .campus-overview-panel,
+  .explore-route-sidebar .route-planner {
+    padding: 18px;
   }
 
-  .category-list {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .campus-overview-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .campus-overview-panel .map-area {
+    height: 480px;
+    min-height: 480px;
   }
 
   .map-area {

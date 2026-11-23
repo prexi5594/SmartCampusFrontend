@@ -1,11 +1,29 @@
 
 import { useState } from "react";
 
-function CampusMap() {
+function CampusMap({
+  route = null,
+  selectedPlaceId = null,
+  onPlaceSelect,
+  showLegend = true,
+}) {
   const [zoom, setZoom] = useState(1);
 
   function changeZoom(amount) {
     setZoom((current) => Math.min(1.2, Math.max(0.9, current + amount)));
+  }
+
+  function placeClass(baseClass, placeId) {
+    let routeClass = "";
+    const locationClass = selectedPlaceId === placeId ? " location-selected" : "";
+
+    if (route?.startId === placeId) {
+      routeClass = " route-start";
+    } else if (route?.destinationId === placeId) {
+      routeClass = " route-destination";
+    }
+
+    return `map-place ${baseClass}${locationClass}${routeClass}`;
   }
 
   return (
@@ -23,40 +41,110 @@ function CampusMap() {
           <div className="map-road road-horizontal road-top" />
           <div className="map-road road-horizontal road-bottom" />
 
-          <div className="map-place place-library">
+          {route && (
+            <svg
+              className="map-route"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              role="img"
+              aria-label={`Illustrative route from ${route.startName} to ${route.destinationName}`}
+            >
+              <polyline
+                points={route.path.map(({ x, y }) => `${x},${y}`).join(" ")}
+              />
+            </svg>
+          )}
+
+          <button
+            type="button"
+            className={placeClass("place-library", "library")}
+            aria-label="Select Library as destination"
+            aria-pressed={selectedPlaceId === "library"}
+            onClick={() => onPlaceSelect?.("library")}
+          >
             <span className="map-building" />
             <strong>Library</strong>
-          </div>
-          <div className="map-place place-halls">
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-halls", "lecture-halls")}
+            aria-label="Select Science Center as destination"
+            aria-pressed={selectedPlaceId === "lecture-halls"}
+            onClick={() => onPlaceSelect?.("lecture-halls")}
+          >
             <span className="map-building selected-building" />
-            <strong>Lecture Halls</strong>
-          </div>
-          <div className="map-place place-labs">
+            <strong>Science Center</strong>
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-labs", "computer-labs")}
+            aria-label="Select Computer Labs as destination"
+            aria-pressed={selectedPlaceId === "computer-labs"}
+            onClick={() => onPlaceSelect?.("computer-labs")}
+          >
             <span className="map-building" />
             <strong>Computer Labs</strong>
-          </div>
-          <div className="map-place place-admin">
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-admin", "administration")}
+            aria-label="Select Administration Block as destination"
+            aria-pressed={selectedPlaceId === "administration"}
+            onClick={() => onPlaceSelect?.("administration")}
+          >
             <span className="map-building" />
-            <strong>Administration</strong>
-          </div>
-          <div className="map-place place-centre">
+            <strong>Administration Block</strong>
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-centre", "student-centre")}
+            aria-label="Select Student Centre as destination"
+            aria-pressed={selectedPlaceId === "student-centre"}
+            onClick={() => onPlaceSelect?.("student-centre")}
+          >
             <span className="map-building" />
             <strong>Student Centre</strong>
-          </div>
-          <div className="map-place place-cafe">
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-cafe", "cafeteria")}
+            aria-label="Select Cafellata as destination"
+            aria-pressed={selectedPlaceId === "cafeteria"}
+            onClick={() => onPlaceSelect?.("cafeteria")}
+          >
             <span className="map-building" />
-            <strong>Cafeteria</strong>
-          </div>
-          <div className="map-place place-parking">
+            <strong>Cafellata</strong>
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-parking", "parking-area")}
+            aria-label="Select Parking Area as destination"
+            aria-pressed={selectedPlaceId === "parking-area"}
+            onClick={() => onPlaceSelect?.("parking-area")}
+          >
             <span className="map-building" />
             <strong>Parking Area</strong>
-          </div>
-          <div className="map-place place-sports">
+          </button>
+          <button
+            type="button"
+            className={placeClass("place-sports", "sports-facilities")}
+            aria-label="Select Sports Facilities as destination"
+            aria-pressed={selectedPlaceId === "sports-facilities"}
+            onClick={() => onPlaceSelect?.("sports-facilities")}
+          >
             <span className="map-building" />
             <strong>Sports Facilities</strong>
-          </div>
+          </button>
           <span className="central-green">CENTRAL GREEN</span>
-          <span className="main-entrance">Main Entrance</span>
+          <button
+            type="button"
+            className={`main-entrance${selectedPlaceId === "main-entrance" ? " location-selected" : ""}${route?.startId === "main-entrance" ? " route-start" : ""}${route?.destinationId === "main-entrance" ? " route-destination" : ""}`}
+            aria-label="Select USIU Gate A as destination"
+            aria-pressed={selectedPlaceId === "main-entrance"}
+            onClick={() => onPlaceSelect?.("main-entrance")}
+          >
+            USIU Gate A
+          </button>
         </div>
 
         <label className="map-search">
@@ -79,11 +167,13 @@ function CampusMap() {
         </div>
       </div>
 
-      <div className="map-legend">
-        <span><i className="legend-buildings" /> Campus buildings</span>
-        <span><i className="legend-green" /> Green spaces</span>
-        <span>Illustrative campus map</span>
-      </div>
+      {showLegend && (
+        <div className="map-legend">
+          <span><i className="legend-buildings" /> Campus buildings</span>
+          <span><i className="legend-green" /> Green spaces</span>
+          <span>Click a building to choose a destination</span>
+        </div>
+      )}
     </section>
   );
 }
