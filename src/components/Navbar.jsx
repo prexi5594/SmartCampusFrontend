@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-function Navbar({ currentPage, onNavigate }) {
+function Navbar({ currentPage, onNavigate, onLogout, isLoggingOut }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function navigate(page) {
@@ -62,6 +62,15 @@ function Navbar({ currentPage, onNavigate }) {
             onClick={() => navigate("contact")}
           >
             Contact
+          </button>
+
+          <button
+            className="nav-link nav-logout"
+            type="button"
+            onClick={onLogout}
+            disabled={isLoggingOut}
+          >
+            {isLoggingOut ? "Signing out…" : "Log out"}
           </button>
 
           <button
