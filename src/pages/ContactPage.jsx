@@ -20,6 +20,24 @@ function ContactPage() {
 
       <p>Have a question or suggestion? Send us a message.</p>
 
+      <section className="security-support-card" aria-labelledby="security-support-title">
+        <div>
+          <h2 id="security-support-title">Lost or need help on campus?</h2>
+          <p>Call campus security for assistance.</p>
+          <strong>+254 768 015 640</strong>
+        </div>
+        <a
+          className="security-call-button"
+          href="tel:+254768015640"
+          aria-label="Call campus security at +254 768 015 640"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 4h3l2 5-2 1.5a15 15 0 0 0 5.5 5.5L15 14l5 2v3c0 1.1-.9 2-2 2C10.3 21 3 13.7 3 5c0-1.1.9-2 2-2Z" />
+          </svg>
+          Call Campus Security
+        </a>
+      </section>
+
       <form className="contact-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Your name</label>
         <input

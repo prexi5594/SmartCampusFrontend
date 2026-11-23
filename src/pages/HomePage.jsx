@@ -8,6 +8,7 @@ function HomePage({
   onExplore,
   onViewLocation,
   onPlaceSelect,
+  onContact,
 }) {
   return (
     <>
@@ -46,7 +47,13 @@ function HomePage({
         <aside className="support-card">
           <strong>Need a hand finding your way?</strong>
           <p>Visit the welcome desk at USIU Gate A for campus information and accessible route guidance.</p>
-          <a href="mailto:campus@example.edu">Contact campus support ↗</a>
+          <button
+            type="button"
+            className="support-contact-link"
+            onClick={onContact}
+          >
+            Contact campus support <span aria-hidden="true">↗</span>
+          </button>
         </aside>
       </section>
     </>

@@ -17,7 +17,7 @@ function Navbar({ currentPage, onNavigate }) {
             <img src="/campus-logo.svg" alt="" />
           </span>
           <span>
-            <strong>  USIU </strong>
+            <strong>   USIU </strong>
             <strong>Smart Campus</strong>
             <small>NAVIGATOR</small>
           </span>

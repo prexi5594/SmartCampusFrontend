@@ -69,6 +69,7 @@ function App() {
             onExplore={() => navigateTo("explore")}
             onViewLocation={handleViewLocation}
             onPlaceSelect={handlePlaceSelect}
+            onContact={() => navigateTo("contact")}
           />
         );
     }
